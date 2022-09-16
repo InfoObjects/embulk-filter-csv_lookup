@@ -79,11 +79,11 @@ Gem::Specification.new do |spec|
   spec.name          = "${project.name}"
   spec.version       = "${project.version}"
   spec.authors       = ["Infoobjects Inc."]
-  spec.summary       = %[Csv Lookup filter plugin for Embulk]
-  spec.description   = %[Csv Lookup]
-  spec.email         = ["ankit.navral@infoobjects.com"]
+  spec.summary       = %[An Embulk filter plugin for Lookup Transformation with CSV]
+  spec.description   = %[Csv Lookup Filter]
+  spec.email         = ["utkarsh@infoobjects.com"]
   spec.licenses      = ["MIT"]
-  # TODO set this: spec.homepage      = "https://github.com/ankit.navral/embulk-filter-csv_lookup"
+  spec.homepage      = "https://github.com/InfoObjects/embulk-filter-csv_lookup"
 
   spec.files         = `git ls-files`.split("\n") + Dir["classpath/*.jar"]
   spec.test_files    = spec.files.grep(%r"^(test|spec)/")
