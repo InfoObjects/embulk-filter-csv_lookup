@@ -78,7 +78,7 @@ task gemspec {
 Gem::Specification.new do |spec|
   spec.name          = "${project.name}"
   spec.version       = "${project.version}"
-  spec.authors       = ["ankit-navral"]
+  spec.authors       = ["Infoobjects Inc."]
   spec.summary       = %[Csv Lookup filter plugin for Embulk]
   spec.description   = %[Csv Lookup]
   spec.email         = ["ankit.navral@infoobjects.com"]
