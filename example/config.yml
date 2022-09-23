@@ -13,9 +13,6 @@ in:
       - {name: attr_1, type: string }
 filters:
   - type: csv_lookup
-    mappingColumn_Key: country_key
-    mappingColumn_Value:
-      - { name: country_name, type: string }
     new_columns:
       - { name: country_name, type: string }
       - { name: country_address, type: string }
@@ -26,9 +23,6 @@ filters:
       - id
       - country_code
   - type: csv_lookup
-    mappingColumn_Key: country_key
-    mappingColumn_Value:
-      - { name: country_name, type: string }
     new_columns:
       - { name: country_code,type: double }
     mapping_from:
