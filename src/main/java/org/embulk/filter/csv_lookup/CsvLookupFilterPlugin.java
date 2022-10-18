@@ -37,6 +37,9 @@ public class CsvLookupFilterPlugin
         @Config("new_columns")
         public SchemaConfig getNewColumns();
 
+        @Config("path_of_lookup_file")
+        public String getPathOfLookupFile();
+
     }
 
     @Override
@@ -97,10 +100,9 @@ public class CsvLookupFilterPlugin
         for (ColumnConfig columnConfig : task.getNewColumns().getColumns()) {
             newColumns.add(columnConfig.getName());
         }
-        String file = "/home/infoobjects/Downloads/sample/countryKey_countryName.csv";
         BufferedReader reader = null;
         String line = "";
-        reader = new BufferedReader(new FileReader(file));
+        reader = new BufferedReader(new FileReader(task.getPathOfLookupFile()));
         String[] lineDataArray;
         Map<String, Integer> map1 = new LinkedHashMap<>();
         List<Integer> list1 = new ArrayList<>();
@@ -128,7 +130,7 @@ public class CsvLookupFilterPlugin
             list2.add(map1.get(newColumns.get(x)));
         }
 
-        CSVReader reader1 = new CSVReader(new FileReader(file));
+        CSVReader reader1 = new CSVReader(new FileReader(task.getPathOfLookupFile()));
         String [] nextLine;
         int i = 0;
         while ((nextLine = reader1.readNext()) != null) {

@@ -13,6 +13,8 @@ An Embulk filter plugin for Lookup Transformation with CSV
 ## Configuration
 
 - **csv_lookup**: Required attributes for the LookUp Filter Plugin -
+    -**filters**
+        - **type**: Name of lookup type (required)
     - **mapping_from**: (Name of columns to be matched with table 2 columns) (required)
         - **Name of column-1**: column name-1 from input file
         - **Name of column-2**: column name-2 from input file etc ...
@@ -22,6 +24,7 @@ An Embulk filter plugin for Lookup Transformation with CSV
     - **new_columns**:   (New generated column names) (required)
         - **Name-1,Type-1**: Any Name, Type of the name (name: country_name, type: string)
         - **Name-2,Type-2**: Any Name, Type of the name (name: country_address, type: string) etc ...
+    - **path_of_lookup_file**: lookup file path
 ## Example - columns
 
 Input1 for table 1 is as follows :-
