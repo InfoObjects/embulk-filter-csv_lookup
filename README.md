@@ -24,7 +24,7 @@ An Embulk filter plugin for Lookup Transformation with CSV
     - **new_columns**:   (New generated column names) (required)
         - **Name-1,Type-1**: Any Name, Type of the name (name: country_name, type: string)
         - **Name-2,Type-2**: Any Name, Type of the name (name: country_address, type: string) etc ...
-    - **path_of_lookup_file**: lookup file path
+    - **path_of_lookup_file**: lookup file path (required)
 ## Example - columns
 
 Input1 for table 1 is as follows :-
