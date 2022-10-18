@@ -13,7 +13,7 @@ An Embulk filter plugin for Lookup Transformation with CSV
 ## Configuration
 
 - **csv_lookup**: Required attributes for the LookUp Filter Plugin -
-    -**filters**
+    -**filters**:
         - **type**: Name of lookup type (required)
     - **mapping_from**: (Name of columns to be matched with table 2 columns) (required)
         - **Name of column-1**: column name-1 from input file
