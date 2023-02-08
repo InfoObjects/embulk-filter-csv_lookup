@@ -13,7 +13,7 @@ in:
       - {name: attr_1, type: string }
 filters:
   - type: csv_lookup
-    path_of_lookup_file: /home/infoobjects/Downloads/sample/countryKey_countryName.csv
+    path_of_lookup_file: /home/infoobjects/GetFiles/countryKey_countryName.csv
     new_columns:
       - { name: country_name, type: string }
       - { name: country_address, type: string }
@@ -24,7 +24,7 @@ filters:
       - id
       - country_code
   - type: csv_lookup
-    path_of_lookup_file: /home/infoobjects/Downloads/sample/countryKey_countryName.csv
+    path_of_lookup_file: /home/infoobjects/GetFiles/countryKey_countryName.csv
     new_columns:
       - { name: country_code,type: double }
     mapping_from:
