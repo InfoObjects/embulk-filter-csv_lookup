@@ -15,7 +15,6 @@ filters:
   - type: csv_lookup
     path_of_lookup_file: /home/infoobjects/GetFiles/countryKey_countryName.csv
     new_columns:
-      - { name: country_name, type: string }
       - { name: country_address, type: string }
     mapping_from:
       - quarter_number
