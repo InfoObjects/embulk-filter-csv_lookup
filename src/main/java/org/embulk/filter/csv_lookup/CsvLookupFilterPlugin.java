@@ -14,6 +14,8 @@ import org.embulk.config.TaskSource;
 import org.embulk.spi.*;
 import org.embulk.spi.time.Timestamp;
 import org.embulk.spi.type.Types;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -25,6 +27,8 @@ import java.util.*;
 public class CsvLookupFilterPlugin
         implements FilterPlugin
 {
+    private static final Logger logger = LoggerFactory.getLogger(CsvLookupFilterPlugin.class);
+
     public interface PluginTask
             extends Task
     {
@@ -178,6 +182,8 @@ public class CsvLookupFilterPlugin
             for (ColumnConfig columnConfig : task.getNewColumns().getColumns()) {
                 columnConfigList.add(columnConfig);
             }
+            Set<String> unmatchedData = new LinkedHashSet<>();
+            List<String> keyColumns = task.getMappingFrom();
 
             while (reader.nextRecord()) {
 
@@ -226,6 +232,19 @@ public class CsvLookupFilterPlugin
                 }
                 builder.addRecord();
             }
+            String info="\n--------------------Unmatched rows.....................\nMapping Key Columns: ";
+            for(int i=0;i<keyColumns.size();i++){
+                info+= keyColumns.get(i);
+                if(i!=keyColumns.size()-1){
+                    info+=",";
+                }
+            }
+            info+="\n";
+
+            for(String key: unmatchedData){
+                info+= key+"\n";
+            }
+            logger.info(info);
 
         }
 

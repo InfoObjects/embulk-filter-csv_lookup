@@ -1,0 +1,48 @@
+exec:
+  max_threads: 1
+  min_output_tasks: 1
+in:
+  type: file
+  path_prefix: "..path../database_table.csv"
+  parser:
+    charset: UTF-8
+    type: csv
+    delimiter: ','
+    quote: '"'
+    header_line: true
+    columns:
+     - { name: ID, type: long }
+     - { name: Name, type: string }
+     - { name: Age, type: string }
+     - { name: Address, type: string }
+     - { name: City, type: string }
+     - { name: Country, type: string }
+     - { name: Salary, type: long }
+filters:
+  - type: csv_lookup
+    mapping_from:
+     - ID
+     - Name
+    mapping_to:
+     - ID
+     - Name
+    new_columns:
+     - { name: Pin, type: string }
+     - { name: Gender, type: string }
+     - { name: Phone_Number, type: string }
+    path_of_lookup_file: ../lookup_table.csv
+out:
+  type: file
+  path_prefix: "..path../output.csv"
+  file_ext: csv
+  formatter:
+    type: csv
+    delimiter: ","
+    newline: CRLF
+    newline_in_field: LF
+    charset: UTF-8
+    quote_policy: MINIMAL
+    quote: '"'
+    escape: "\\"
+    null_string: "\\N"
+    default_timezone: 'UTC'

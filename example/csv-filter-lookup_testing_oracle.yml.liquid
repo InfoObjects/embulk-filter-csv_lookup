@@ -1,0 +1,36 @@
+exec:
+  max_threads: 1
+  min_output_tasks: 1
+in:
+  type: jdbc
+  host: localhost
+  driver_path: "...path../ojdbc8.jar"
+  driver_class: 'oracle.jdbc.driver.OracleDriver'
+  url: jdbc:oracle:thin:@localhost:1521:orcl
+  user: MYUSER
+  password: ABCD
+  database: DEMO
+  table: database_table
+filters:
+  - type: csv_lookup
+    mapping_from:
+    - id
+    - name
+    mapping_to:
+     - ID
+     - Name
+    new_columns:
+     - { name: Pin, type: string }
+     - { name: Gender, type: string }
+     - { name: Phone_Number, type: string }
+    path_of_lookup_file: ../lookup_table.csv
+out:
+  type: jdbc
+  host: localhost
+  driver_path: "..path../ojdbc8.jar"
+  driver_class: 'oracle.jdbc.driver.OracleDriver'
+  url: jdbc:oracle:thin:@localhost:1521:orcl
+  user: MYUSER
+  password: ABCD
+  database: DEMO
+  table: database_table
