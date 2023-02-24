@@ -217,6 +217,8 @@ public class CsvLookupFilterPlugin
                 List<String> matchedData = new ArrayList<>();
                 if (keyValuePair.containsKey(key)) {
                     matchedData = keyValuePair.get(key);
+                }else{
+                    unmatchedData.add(key);
                 }
 
                 if (matchedData.size() == 0) {
