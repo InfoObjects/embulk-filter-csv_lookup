@@ -22,83 +22,97 @@ An Embulk filter plugin for Lookup Transformation with CSV
         - **Name of column-1**: column name-1 from input file
         - **Name of column-2**: column name-2 from input file
     - **new_columns**:   (New generated column names) (required)
-        - **Name-1,Type-1**: Any Name, Type of the name (name: country_name, type: string)
-        - **Name-2,Type-2**: Any Name, Type of the name (name: country_address, type: string) etc ...
+        - **Name-1,Type-1**: Any Name, Type of the name { name: car_id, type: long }
+        - **Name-2,Type-2**: Any Name, Type of the name { name: category, type: string }
+        - **Name-3,Type-3**: Any Name, Type of the name { name: fuel_capacity, type: string }
     - **path_of_lookup_file**: lookup file path (required)
 ## Example - columns
 
-Input1 for table 1 is as follows :-
+Customer.csv for table 1 is as follows :-
 
 ```
-    year               country_code                 country_name            literacy_rate
-    
-    1990                    1                          India                       80%
-    1993                    2                           USA                        83%
-    1997                    3                          JAPAN                        
-    1999                    4                          China                       72%
-    2000                    5                         Ukraine                      68%
-    2002                    6                          Italy                       79%
-    2004                    7                            UK                        75%
-    2011                    8                           NULL                       42%
+id  customer_name       address                     email                       car_name    company
+1   John Doe            123 Main St, Anytown USA    john.doe@example.com        Civic       Honda
+2   Jane Smith          456 Elm St, Anytown USA     jane.smith@example.com      E-Class     Mercedes-Benz
+3   Bob Johnson         789 Oak St, Anytown USA     bob.johnson@example.com     GLE-Class   Mercedes-Benz
+4   Amanda Hernandez    999 Cedar St, Anytown USA   amanda.hernandez@example.com 911        119
+5   Tom Brown           567 Pine St, Anytown USA    tom.brown@example.com       C-Class     Mercedes-Benz
+6   Samantha Davis      890 Cedar St, Anytown USA   samantha.davis@example.com  Civic       Honda
+7   Mike Wilson         1234 Spruce St, Anytown USA mike.wilson@example.com     GLE-Class   Mercedes-Benz
+8   Jason Brown         888 Pine St, Anytown USA    jason.brown@example.com     911         Porsche
+9   David Rodriguez     9010 Oak St, Anytown USA    david.rodriguez@example.com GLC-Class   Mercedes-Benz
+10  Mark Davis          666 Spruce St, Anytown USA  mark.davis@example.com      C-Class     Mercedes-Benz
+11  Chris Thompson      222 Cedar St, Anytown USA   chris.thompson@example.com  Cayenne     Porsche
+12  Linda Young         555 Birch St, Anytown USA   linda.young@example.com     RAV4
+13  Kevin Hernandez     444 Maple St, Anytown USA   kevin.hernandez@example.com 911         119
 ```
 
-Input2 for table 2 is as follows :-
+Car.csv for table 2 is as follows :-
 
 ```
-    id               country_population                        country_address               country_GDP
+car_id  model       brand            category   fuel_capacity  
+87      GLE-Class   Mercedes-Benz   SUV         80
+101     Cayenne     Porsche         SUV         75
+119     911         Porsche         Sports Car  64
+205     Accord      Honda           Sedan       56
+334     Pilot       Honda           SUV         70
+434     CR-v        Honda           SUV         64      
+559     C-Class     Mercedes-Benz   Sedan       66
+603     Civic       Honda           Sedan       42
+697     E-Class     Mercedes-Benz   Sedan       72
+812     GLC-Class   Mercedes-Benz   Sedan       68                            
     
-    1                       11.3                                    India                       1.67
-    2                       18.2                                     USA                        16.72
-    3                       30                                      JAPAN                       5.00
-    4                       4                                       China                       9.33
-    5                       57                                     Ukraine                      1.08
-    6                       63                                      Italy                       2.068
-    7                       17                                       UK                         2.49
-    8                       28                                       UAE                        1.18                            
-    
-    
-    Note: country_population is calculated in Billion and country_GDP is calculated in $USD Trillion
 ```
 
 As shown in yaml below, columns mentioned in mapping_from will be mapped with columns mentioned in mapping_to      
 ie:
-
-
-country_code : id                       
-country_name : country_address
+car_name : model                       
+company : brand
 
 After successful mapping an Output.csv file containing the columns mentioned in new_columns will be generated
 
 Output File generated :-
 
 ```
-    year               country_code                 country_name              literacy_rate                 country_GDP                   country_population
-    
-    1990                    1                          India                       80%                         1.67                                11.3
-    1993                    2                           USA                        83%                         16.72                               18.2
-    1997                    3                          JAPAN                                                   5.00                                30
-    1999                    4                          China                       72%                         9.33                                4
-    2000                    5                         Ukraine                      68%                         1.08                                57
-    2002                    6                          Italy                       79%                         2.068                               63
-    2004                    7                            UK                        75%                         2.49                                17
-    2011                    8                           NULL                       42%                                                         
+1   John Doe            123 Main St, Anytown USA    john.doe@example.com        Civic       Honda           603     Sedan       42
+2   Jane Smith          456 Elm St, Anytown USA     jane.smith@example.com      E-Class     Mercedes-Benz   697     Sedan       72 
+3   Bob Johnson         789 Oak St, Anytown USA     bob.johnson@example.com     GLE-Class   Mercedes-Benz   87      SUV         80
+4   Amanda Hernandez    999 Cedar St, Anytown USA   amanda.hernandez@example.com 911        119              0         
+5   Tom Brown           567 Pine St, Anytown USA    tom.brown@example.com       C-Class     Mercedes-Benz   559     Sedan       66   
+6   Samantha Davis      890 Cedar St, Anytown USA   samantha.davis@example.com  Civic       Honda           603     Sedan       42   
+7   Mike Wilson         1234 Spruce St, Anytown USA mike.wilson@example.com     GLE-Class   Mercedes-Benz   87      SUV         80   
+8   Jason Brown         888 Pine St, Anytown USA    jason.brown@example.com     911         Porsche         119     Sport Car   64   
+9   David Rodriguez     9010 Oak St, Anytown USA    david.rodriguez@example.com GLC-Class   Mercedes-Benz   812     SUV         68
+10  Mark Davis          666 Spruce St, Anytown USA  mark.davis@example.com      C-Class     Mercedes-Benz   559     Sedan       66   
+11  Chris Thompson      222 Cedar St, Anytown USA   chris.thompson@example.com  Cayenne     Porsche         101     SUV         75   
+12  Linda Young         555 Birch St, Anytown USA   linda.young@example.com     RAV4        \N               0  
+13  Kevin Hernandez     444 Maple St, Anytown USA   kevin.hernandez@example.com 911         119              0                                                         
 ```
 
 ```yaml
- - type: csv_lookup
-   mapping_from:
-   - country_code
-   - country_name
-   mapping_to:
-   - id
-   - country_address
-   new_columns:
-   - { name: country_GDP, type: string }
-   - { name: country_population, type: string }
+filters:
+  - type: csv_lookup
+    mapping_from:
+      - car_name
+      - company
+    mapping_to:
+      - model
+      - brand
+    new_columns:
+      - { name: car_id, type: long }
+      - { name: category, type: string }
+      - { name: fuel_capacity, type: string }
+    path_of_lookup_file: "..path../car.csv"
 ```
 
 Notes:
 1. mapping_from attribute should be in same order as mentioned in input file.
+2. This attribute needs to be provided(in input plugin) while using jdbc input plugin in case datatype is Number:------
+``` 
+     column_options: 
+     id: {value_type: long}
+```
+3. Matching columns data types must be int,long and String
 
 ## Development
 

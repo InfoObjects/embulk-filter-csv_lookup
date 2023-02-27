@@ -9,20 +9,20 @@ in:
   password: 1234
   schema: public
   database: test
-  table: database_table
+  table: customer
 filters:
   - type: csv_lookup
     mapping_from:
-    - id
-    - name
+      - car_name
+      - company
     mapping_to:
-     - ID
-     - Name
+      - model
+      - brand
     new_columns:
-     - { name: Pin, type: string }
-     - { name: Gender, type: string }
-     - { name: Phone_Number, type: string }
-    path_of_lookup_file: ../lookup_table.csv
+      - { name: car_id, type: long }
+      - { name: category, type: string }
+      - { name: fuel_capacity, type: string }
+    path_of_lookup_file: "..path../car.csv"
 out:
   type: postgresql
   host: localhost
@@ -31,5 +31,5 @@ out:
   user: postgres
   password: 1234
   schema: public
-  table:  output_table_1
+  table:  output_table
   mode: truncate_insert
