@@ -74,6 +74,7 @@ After successful mapping an Output.csv file containing the columns mentioned in 
 Output File generated :-
 
 ```
+id  customer_name       address                     email                       car_name    company         car_id  category   fuel_capacity  
 1   John Doe            123 Main St, Anytown USA    john.doe@example.com        Civic       Honda           603     Sedan       42
 2   Jane Smith          456 Elm St, Anytown USA     jane.smith@example.com      E-Class     Mercedes-Benz   697     Sedan       72 
 3   Bob Johnson         789 Oak St, Anytown USA     bob.johnson@example.com     GLE-Class   Mercedes-Benz   87      SUV         80
@@ -106,8 +107,8 @@ filters:
 ```
 
 Notes:
-1. mapping_from attribute should be in same order as mentioned in input file.
-2. This attribute needs to be provided(in input plugin) while using jdbc input plugin in case datatype is Number:------
+1. mapping_from attribute should be in the same the order as mentioned in the input file. 
+2. In case with JDBC plugin if any integer column returned as float/decimal then use to cast that column as long as below
 ``` 
      column_options: 
      id: {value_type: long}
